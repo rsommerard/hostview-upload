@@ -4,12 +4,12 @@ Hostview Upload is a very simple [Sails](http://sailsjs.org) application that re
 
 ## Contents
 
-Dockerfile	The app Docker image.
-dev.yml		Docker Compose config for development.
-prod.yml	Docker Compose config for production.
-README.md	This file.
-LICENSE		Source license (MIT).
-app/		The app source code.
+    Dockerfile	The app Docker image.
+    dev.yml		Docker Compose config for development.
+    prod.yml	Docker Compose config for production.
+    README.md	This file.
+    LICENSE		Source license (MIT).
+    app/		The app source code.
 
 
 ## Deployment
