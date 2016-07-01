@@ -58,10 +58,9 @@ To run all the unit tests (in ./app/test), do:
 
 *TODO*
 
-On the production server we start several upload app instances behind a Nginx proxy for load balancing in-coming traffic. All running apps write received files to a shared volume container. In addition, the app contains a cron-job container to move received files to the target data store server.
+On the production server we start several upload app instances behind a Nginx proxy for load balancing in-coming traffic. All running apps write received files to a shared volume container (mounted on the host). In addition, the app contains a cron-job container to move received files to the target data server.
 
-We manage this set of containers with Docker Compose. The yml file contains the variable configuration as environment variables. Launch the full application with:
+To launch the production instance, do:
 
     docker-compose -f prod.yml up
-
  
