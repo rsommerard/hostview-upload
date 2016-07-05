@@ -18,9 +18,9 @@ The dev and prod deployments are managed as [Docker](https://www.docker.com/) co
 
     docker build -t hostview/upload .
 
-You should prepare a new build everytime you update node dependencies in 
-the application's package.json, and when you modify the code (unless you have
-mounted the application folder on the host).
+You should prepare a new build everytime you update node dependencies in the application's package.json, and when you modify the code (unless you have mounted the application folder on the host).
+
+Docker volume sharing makes storing the raw files on the host a bit tricky as the user ids of the container and the host do not match ... The current solution is to make sure the /data mount point on the host is writable by everyone. Check the configuration before running the containers!
 
 
 ### Development
@@ -43,6 +43,7 @@ Alternatively, there's a Docker Compose file for running a development instance 
 
     docker-compose -f dev.yml up
 
+
 ### Testing
 
 Basic upload test with curl:
@@ -62,5 +63,5 @@ On the production server we start several upload app instances behind a Nginx pr
 
 To launch the production instance, do:
 
-    docker-compose -f prod.yml up
+    docker-compose -f prod.yml -d up
  

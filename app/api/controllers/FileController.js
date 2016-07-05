@@ -6,6 +6,7 @@
  */
 
  var fs = require('fs-extra')
+     , path = require('path')
 
 // Source: http://weeknumber.net/how-to/javascript 
 // Returns the ISO week of the date.
@@ -34,10 +35,12 @@ module.exports = {
             ', deviceid=' + req.params.deviceid + 
             ', filename=' + req.params.filename);
 
-        var dstdir = sails.config.upload.datadir + '/' + 
-            req.params.deviceid + '/' + 
-            dt.getFullYear() + '/' + 
-            getWeek(dt) + '/';
+        var dstdir = path.join([
+                        sails.config.upload.datadir, 
+                        req.params.version, 
+                        req.params.deviceid, 
+                        dt.getFullYear(), 
+                        getWeek(dt)]);
 
         sails.log.verbose("[FileController] ensure dir " + dstdir);
 
