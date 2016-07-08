@@ -37,8 +37,8 @@ module.exports = {
 
         var dstdir = path.join([
                         sails.config.upload.datadir, 
-                        req.params.version, 
                         req.params.deviceid, 
+                        req.params.version, 
                         dt.getFullYear(), 
                         getWeek(dt)]);
 
@@ -62,7 +62,7 @@ module.exports = {
 
             pipe.on('finish', function() {
                 fs.stat(dstfile, function(err, stats) {
-                    if (err || !stats.isFile()) {
+                    if (err || !stats || !stats.isFile()) {
                         sails.log.error("[FileController] failed to create " + 
                                         dstfile);
                         if (err) sails.log.error(err);

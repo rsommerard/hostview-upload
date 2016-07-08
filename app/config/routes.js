@@ -48,5 +48,10 @@ module.exports.routes = {
   'POST /:version/:deviceid/:filename': { 
       controller : "FileController", 
       action : "upload" 
+  },
+
+  'PUT /:version/:deviceid/:filename': { 
+      controller : "FileController", 
+      action : "upload" 
   }
 };
