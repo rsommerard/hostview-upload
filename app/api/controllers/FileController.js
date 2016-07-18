@@ -28,19 +28,21 @@ module.exports = {
     * Handle incoming file upload.
     */
     upload: function(req, res) {
-        var dt = new Date();
+        // Use the session timestamp as the file timestamp (so that pcap parts for example 
+        // end up to the same folder .. )
+        var dt = new Date(parseInt(req.params.filename.split('_')[0]));
 
         sails.log.info('[FileController] [' + dt.toString() + '] upload req client=' + 
             req.clientip+', version=' + req.params.version + 
             ', deviceid=' + req.params.deviceid + 
             ', filename=' + req.params.filename);
 
-        var dstdir = path.join([
+        var dstdir = path.join(
                         sails.config.upload.datadir, 
                         req.params.deviceid, 
-                        req.params.version, 
-                        dt.getFullYear(), 
-                        getWeek(dt)]);
+                        req.params.version.replace(/,/g,'.'), 
+                        dt.getFullYear()+'', 
+                        getWeek(dt)+'');
 
         sails.log.verbose("[FileController] ensure dir " + dstdir);
 
@@ -50,7 +52,7 @@ module.exports = {
                 return res.serverError();
             }
 
-            var dstfile = dstdir + req.params.filename;
+            var dstfile = path.join(dstdir, req.params.filename);
             sails.log.verbose("[FileController] start writing " + dstfile);
 
             var pipe = req.pipe(fs.createWriteStream(dstfile)); 
