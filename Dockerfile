@@ -1,5 +1,5 @@
 # current stable LTS on top of debian image
-FROM node:4.4.4-wheezy
+FROM node:4.4.7-wheezy
 
 # create non-root user account
 RUN groupadd -r nodeuser && useradd -r -g nodeuser nodeuser

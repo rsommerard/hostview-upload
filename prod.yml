@@ -1,0 +1,27 @@
+version: '2'
+
+services:
+  nginx:
+    image: nginx:1.10
+    networks:
+      - backtier
+    volumes:
+     - ./proxy/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+     - "8080:80"
+
+  processing:
+    build: .
+    image: hostview/upload
+    volumes:
+     - /home/hostview/data:/data
+    links:
+     - nginx
+    networks:
+     - backtier
+    environment:
+     NODE_ENV: production
+
+networks:
+  backtier:
+    driver: bridge

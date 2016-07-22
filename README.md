@@ -33,7 +33,7 @@ This starts a single container with an instance of the upload app. The app is li
 
 To get a shell access to the container (will not start the app), do:
 
-    docker run --rm -it -e NODE_ENV=development -p 1337:1337 hostview/upload /bin/bash
+    docker run --rm -it -p 1337:1337 hostview/upload /bin/bash
 
 To mount the app source (excluding installed dependencies in node_modules on the image) and incoming data volumes on the host for faster debugging and development, do:
 
@@ -56,8 +56,6 @@ To run all the unit tests (in ./app/test), do:
 
 
 ### Production
-
-*TODO*
 
 On the production server we start several upload app instances behind a Nginx proxy for load balancing in-coming traffic. All running apps write received files to a shared volume container (mounted on the host). In addition, the app contains a cron-job container to move received files to the target data server.
 
