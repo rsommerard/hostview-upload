@@ -9,14 +9,40 @@ services:
      - ./proxy/nginx.conf:/etc/nginx/nginx.conf
     ports:
      - "8080:80"
+    links:
+     - upload1
+     - upload2
+     - upload3
 
-  processing:
+  cronhost:
+    volumes:
+     - /home/hostview/data:/data
+
+  upload1:
     build: .
     image: hostview/upload
     volumes:
      - /home/hostview/data:/data
-    links:
-     - nginx
+    networks:
+     - backtier
+    environment:
+     NODE_ENV: production
+
+  upload2:
+    build: .
+    image: hostview/upload
+    volumes:
+     - /home/hostview/data:/data
+    networks:
+     - backtier
+    environment:
+     NODE_ENV: production
+
+  upload3:
+    build: .
+    image: hostview/upload
+    volumes:
+     - /home/hostview/data:/data
     networks:
      - backtier
     environment:
