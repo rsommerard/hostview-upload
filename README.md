@@ -64,14 +64,20 @@ To launch the production instance, do:
 
     docker-compose -f prod.yml -d up
 
-In addition, you need to configure a cron-job on the host to move data from the data 
-volume folder to ucn for processing. Example below: 
+TODO: figure out how to do dynamic scaling (docker-compose set scale) with nginx, the current setup is a bit manual (with each worker container being configured in the prod.yml and in the nginx conf).
+
+TODO: log rotation within the containers.
 
 
 ### Production: muse.inria.fr
 
-The muse server is 32-bit, hence no Docker. The app is installed to /home/nodeapp/apps/hostviewupload. The app is managed with PM2 that takes care of running a cluster of instances + load balancing. To start, run:
+The muse server is 32-bit, hence no Docker. The app is installed to /home/nodeapp/apps/hostviewupload. The app is managed with [PM2](https://github.com/Unitech/pm2) that takes care of running a cluster of instances + load balancing. To start, run:
 
     sudo -u nodeapp pm2 start processes.json
 
-Add the same cron-job as above to move the data from the incoming folder to ucn for processing.
+To see more information about running apps + logs, do
+
+    sudo -u nodeapp pm2 list
+    sudo -u nodeapp pm2 logs
+
+The pm2 app logs are rotated by the logrotate daemon (see, /etc/logrotate.d/pm2-nodeapp).

@@ -24,6 +24,7 @@ services:
      - backtier
     environment:
      NODE_ENV: production
+     DEBUG: hostview
      sails_upload__datadir: /data
 
   upload2:
@@ -35,6 +36,7 @@ services:
      - backtier
     environment:
      NODE_ENV: production
+     DEBUG: hostview
      sails_upload__datadir: /data
 
   upload3:
@@ -46,6 +48,7 @@ services:
      - backtier
     environment:
      NODE_ENV: production
+     DEBUG: hostview
      sails_upload__datadir: /data
 
 networks:
