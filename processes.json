@@ -14,7 +14,7 @@
         "NODE_ENV" : "production",
         "PORT"     : "3100",
         "DEBUG"    : "hostview",
-        "sails_upload__datadir" : "/home/nodeapp/data"
+        "sails_upload__datadir" : "/home/nodeapp/hostviewdata"
     }
   }]
 }
