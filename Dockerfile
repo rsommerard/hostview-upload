@@ -5,7 +5,7 @@ FROM node:4.4.7-wheezy
 RUN groupadd -r nodeuser && useradd -r -g nodeuser nodeuser
 
 # add global node stuff
-RUN npm install -g sails@0.12.3 pm2@1.1.3
+RUN npm install -g sails@0.12.3
 
 # create and expose the volume for the data
 RUN mkdir /data && chown nodeuser:nodeuser /data

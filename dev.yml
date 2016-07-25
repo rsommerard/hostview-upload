@@ -4,6 +4,7 @@ upload:
    - "1337:1337"
   environment:
    NODE_ENV: development
+   sails_upload__datadir: /data
   volumes:
    - ./data:/data
    - ./app:/app

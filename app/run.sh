@@ -9,8 +9,6 @@ if [[ $TEST && ${TEST-x} ]] ; then
 elif [[ $DEBUG && ${DEBUG-x} ]] ; then
     echo "Starting the debugger ..."
     exec npm run-script debug
-elif [ "$NODE_ENV" == 'development' ]; then
-    exec npm start
 else
-    exec pm2 start app.js -x -- --prod
+    exec npm start
 fi

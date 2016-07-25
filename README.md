@@ -4,12 +4,13 @@ Hostview Upload is a very simple [Sails](http://sailsjs.org) application that re
 
 ## Contents
 
-    Dockerfile	The app Docker image.
-    dev.yml		Docker Compose config for development.
-    prod.yml	Docker Compose config for production.
-    README.md	This file.
-    LICENSE		Source license (MIT).
-    app/		The app source code.
+    Dockerfile	     The app Docker image.
+    dev.yml		     Docker Compose config for development.
+    prod.yml	     Docker Compose config for production.
+    processes.json   PM2 configuration for production.
+    LICENSE		     Source license (MIT).
+    app/		     The app source code.
+    proxy/           nginx load-balancer config
 
 
 ## Deployment
@@ -57,9 +58,20 @@ To run all the unit tests (in ./app/test), do:
 
 ### Production
 
-On the production server we start several upload app instances behind a Nginx proxy for load balancing in-coming traffic. All running apps write received files to a shared volume container (mounted on the host). In addition, the app contains a cron-job container to move received files to the target data server.
+On the production server we start several upload app instances behind a Nginx proxy for load balancing in-coming traffic. All running apps write received files to a shared volume container (mounted on the host). 
 
 To launch the production instance, do:
 
     docker-compose -f prod.yml -d up
- 
+
+In addition, you need to configure a cron-job on the host to move data from the data 
+volume folder to ucn for processing. Example below: 
+
+
+### Production: muse.inria.fr
+
+The muse server is 32-bit, hence no Docker. The app is installed to /home/nodeapp/apps/hostviewupload. The app is managed with PM2 that takes care of running a cluster of instances + load balancing. To start, run:
+
+    sudo -u nodeapp pm2 start processes.json
+
+Add the same cron-job as above to move the data from the incoming folder to ucn for processing.
