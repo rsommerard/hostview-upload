@@ -32,7 +32,7 @@ module.exports = {
         // end up to the same folder .. )
         var dt = new Date(parseInt(req.params.filename.split('_')[0]));
 
-        sails.log.info('[FileController] [' + dt.toString() + '] upload req client=' + 
+        sails.log.debug('[FileController] [' + dt.toString() + '] upload req client=' + 
             req.clientip+', version=' + req.params.version + 
             ', deviceid=' + req.params.deviceid + 
             ', filename=' + req.params.filename);
@@ -81,7 +81,7 @@ module.exports = {
 
                     } else {
                         // all good
-                        sails.log.verbose("[FileController] wrote " + stats['size'] + 
+                        sails.log.debug("[FileController] wrote " + stats['size'] + 
                                           " bytes to " + dstfile);
                         return res.ok();
                     } 

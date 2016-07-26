@@ -13,7 +13,7 @@
 module.exports = {
 
   log: {
-      level: "warn"
+      level: "debug"
   }
 
 };
