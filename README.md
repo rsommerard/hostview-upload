@@ -49,7 +49,7 @@ Alternatively, there's a Docker Compose file for running a development instance 
 
 Basic upload test with curl:
 
-    curl -i -X POST localhost:1337/1234/5678/foo.txt -H "Content-Type: application/octet-stream" --data-binary "@app/test/foo.txt"
+    curl -i -X POST localhost:1337/0,0,1/12345678/1468403375105_foo.txt -H "Content-Type: application/octet-stream" --data-binary "@app/test/1468403375105_foo.txt"
 
 To run all the unit tests (in ./app/test), do:
 
