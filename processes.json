@@ -9,7 +9,7 @@
     "pid_file"     : "/home/nodeapp/pids/hostviewupload",
     "run_as_user"  : "nodeapp",
     "run_as_group" : "nodeapp",
-    "cwd"          : "/home/nodeapp/apps/hostviewupload",
+    "cwd"          : "/home/nodeapp/apps/hostviewupload/app",
     "env": {
         "NODE_ENV" : "production",
         "PORT"     : "3100",

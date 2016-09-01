@@ -4,18 +4,20 @@ Hostview Upload is a very simple [Sails](http://sailsjs.org) application that re
 
 ## Contents
 
-    Dockerfile	     The app Docker image.
-    dev.yml		     Docker Compose config for development.
-    prod.yml	     Docker Compose config for production.
-    processes.json   PM2 configuration for production.
-    LICENSE		     Source license (MIT).
-    app/		     The app source code.
-    proxy/           nginx load-balancer config
+    Dockerfile      The app Docker image.
+    dev.yml         Docker Compose config for development.
+    prod.yml        Docker Compose config for production.
+    processes.json  PM2 configuration for production.
+    LICENSE		    Source license (MIT).
+    app/		    The upload app source code.
+    proxy/          nginx load-balancer config
 
 
-## Deployment
+## Development
 
-The dev and prod deployments are managed as [Docker](https://www.docker.com/) containers. To build the app Docker image, do:
+### Environment
+
+The dev environment is managed as [Docker](https://www.docker.com/) containers. To build the app Docker image, do:
 
     docker build -t hostview/upload .
 
@@ -23,8 +25,7 @@ You should prepare a new build everytime you update node dependencies in the app
 
 Docker volume sharing makes storing the raw files on the host a bit tricky as the user ids of the container and the host do not match ... The current solution is to make sure the /data mount point on the host is writable by everyone. Check the configuration before running the containers!
 
-
-### Development
+### Running
 
 To run a stand-alone development version of the image, do:
 
@@ -44,7 +45,6 @@ Alternatively, there's a Docker Compose file for running a development instance 
 
     docker-compose -f dev.yml up
 
-
 ### Testing
 
 Basic upload test with curl:
@@ -56,7 +56,9 @@ To run all the unit tests (in ./app/test), do:
     docker run --rm -e NODE_ENV=development -e TEST=1 hostview/upload
 
 
-### Production
+## Production
+
+### With Docker (TODO)
 
 On the production server we start several upload app instances behind a Nginx proxy for load balancing in-coming traffic. All running apps write received files to a shared volume container (mounted on the host). 
 
@@ -68,10 +70,9 @@ TODO: figure out how to do dynamic scaling (docker-compose set scale) with nginx
 
 TODO: log rotation within the containers.
 
+### With PM2
 
-### Production: muse.inria.fr
-
-The muse server is 32-bit, hence no Docker. The app is installed to /home/nodeapp/apps/hostviewupload. The app is managed with [PM2](https://github.com/Unitech/pm2) that takes care of running a cluster of instances + load balancing. To start, run:
+The current deployment on muse.inria.fr does not use Docker as the logging needs to be implemented. The upload app is installed to /home/nodeapp/apps/hostviewupload. The app is managed with [PM2](https://github.com/Unitech/pm2) that takes care of running a cluster of instances + load balancing. To start, run:
 
     sudo -u nodeapp pm2 start processes.json
 
