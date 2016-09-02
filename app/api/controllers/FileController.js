@@ -5,8 +5,8 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 
- var fs = require('fs-extra')
-     , path = require('path')
+var fs = require('fs-extra')
+    ,path = require('path')
 
 // Source: http://weeknumber.net/how-to/javascript 
 // Returns the ISO week of the date.

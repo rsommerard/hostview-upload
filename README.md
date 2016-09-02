@@ -68,11 +68,13 @@ To launch the production instance, do:
 
 TODO: figure out how to do dynamic scaling (docker-compose set scale) with nginx, the current setup is a bit manual (with each worker container being configured in the prod.yml and in the nginx conf).
 
-TODO: log rotation within the containers.
+TODO: log rotation (nginx) within the containers.
 
 ### With PM2
 
-The current deployment on muse.inria.fr does not use Docker as the logging needs to be implemented. The upload app is installed to /home/nodeapp/apps/hostviewupload. The app is managed with [PM2](https://github.com/Unitech/pm2) that takes care of running a cluster of instances + load balancing. To start, run:
+The current deployment on muse.inria.fr does not use Docker as the logging needs to be implemented. 
+
+The upload app is installed to /home/nodeapp/apps/hostviewupload. The app is managed with [PM2](https://github.com/Unitech/pm2) that takes care of running a cluster of instances + load balancing. To start, run:
 
     sudo -u nodeapp pm2 start processes.json
 
