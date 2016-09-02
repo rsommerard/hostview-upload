@@ -51,9 +51,15 @@ module.exports = {
                 sails.log.error(err);
                 return res.serverError();
             }
+            
+            // ug+rwx, o+rx
+            fs.chmodSync(dstdir, '775');
 
             var dstfile = path.join(dstdir, req.params.filename);
             sails.log.verbose("[FileController] start writing " + dstfile);
+
+            // ug+rw, o+rx
+            fs.chmodSync(dstfile, '664');
 
             var pipe = req.pipe(fs.createWriteStream(dstfile)); 
 
