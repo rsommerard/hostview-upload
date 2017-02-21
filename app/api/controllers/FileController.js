@@ -8,7 +8,7 @@
 var fs = require('fs-extra')
     ,path = require('path')
 
-// Source: http://weeknumber.net/how-to/javascript 
+// Source: http://weeknumber.net/how-to/javascript
 // Returns the ISO week of the date.
 var getWeek = function(dt) {
     var date = new Date(dt.getTime());
@@ -28,20 +28,20 @@ module.exports = {
     * Handle incoming file upload.
     */
     upload: function(req, res) {
-        // Use the session timestamp as the file timestamp (so that pcap parts for example 
+        // Use the session timestamp as the file timestamp (so that pcap parts for example
         // end up to the same folder .. )
         var dt = new Date(parseInt(req.params.filename.split('_')[0]));
 
-        sails.log.debug('[FileController] [' + dt.toString() + '] upload req client=' + 
-            req.clientip+', version=' + req.params.version + 
-            ', deviceid=' + req.params.deviceid + 
+        sails.log.debug('[FileController] [' + dt.toString() + '] upload req client=' +
+            req.clientip+', version=' + req.params.version +
+            ', deviceid=' + req.params.deviceid +
             ', filename=' + req.params.filename);
 
         var dstdir = path.join(
-                        sails.config.upload.datadir, 
-                        req.params.deviceid, 
-                        req.params.version.replace(/,/g,'.'), 
-                        dt.getFullYear()+'', 
+                        sails.config.upload.datadir,
+                        req.params.deviceid,
+                        req.params.version.replace(/,/g,'.'),
+                        dt.getFullYear()+'',
                         getWeek(dt)+'');
 
         sails.log.verbose("[FileController] ensure dir " + dstdir);
@@ -58,10 +58,7 @@ module.exports = {
             var dstfile = path.join(dstdir, req.params.filename);
             sails.log.verbose("[FileController] start writing " + dstfile);
 
-            // ug+rw, o+r
-            fs.chmodSync(dstfile, '664');
-
-            var pipe = req.pipe(fs.createWriteStream(dstfile)); 
+            var pipe = req.pipe(fs.createWriteStream(dstfile));
 
             pipe.on('error', function(err) {
                 sails.log.error(err);
@@ -71,14 +68,14 @@ module.exports = {
             pipe.on('finish', function() {
                 fs.stat(dstfile, function(err, stats) {
                     if (err || !stats || !stats.isFile()) {
-                        sails.log.error("[FileController] failed to create " + 
+                        sails.log.error("[FileController] failed to create " +
                                         dstfile);
                         if (err) sails.log.error(err);
                         return res.serverError();
-  
+
                     } else if (stats['size'] != req.headers['content-length']) {
                         // missing bytes
-                        sails.log.debug("[FileController] failed to write " + 
+                        sails.log.debug("[FileController] failed to write " +
                             dstfile + ", wrote " + stats['size'] + " bytes " +
                             " got " + req.headers['content-length'] + " bytes");
 
@@ -87,10 +84,12 @@ module.exports = {
 
                     } else {
                         // all good
-                        sails.log.debug("[FileController] wrote " + stats['size'] + 
+                      // ug+rw, o+r
+                        fs.chmodSync(dstfile, '664');
+                        sails.log.debug("[FileController] wrote " + stats['size'] +
                                           " bytes to " + dstfile);
                         return res.ok();
-                    } 
+                    }
                 }); // fstat
             }); // onFinish
         }); // ensureDir
