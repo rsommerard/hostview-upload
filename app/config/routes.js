@@ -19,9 +19,7 @@
  * For more information on configuring custom routes, check out:
  * http://sailsjs.org/#!/documentation/concepts/Routes/RouteTargetSyntax.html
  */
-
 module.exports.routes = {
-
   /***************************************************************************
   *                                                                          *
   * Make the view located at `views/homepage.ejs` (or `views/homepage.jade`, *
@@ -31,11 +29,9 @@ module.exports.routes = {
   * `assets` directory)                                                      *
   *                                                                          *
   ***************************************************************************/
-
   //'/': {
   //  view: 'homepage'
   //}
-
   /***************************************************************************
   *                                                                          *
   * Custom routes here...                                                    *
@@ -45,13 +41,13 @@ module.exports.routes = {
   * for configuration options and examples.                                  *
   *                                                                          *
   ***************************************************************************/
-  'POST /:version/:deviceid/:filename': { 
-      controller : "FileController", 
-      action : "upload" 
+  'POST /:version/:deviceid/:filename': {
+    controller: 'FileController',
+    action: 'upload'
   },
 
-  'PUT /:version/:deviceid/:filename': { 
-      controller : "FileController", 
-      action : "upload" 
+  'PUT /:version/:deviceid/:filename': {
+    controller: 'FileController',
+    action: 'upload'
   }
-};
+}

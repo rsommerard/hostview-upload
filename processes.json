@@ -1,19 +1,19 @@
 {
-  "apps" : [{
-    "name"         : "hostviewupload",
-    "script"       : "app.js",
-    "instances"    : "4",
-    "exec_mode"    : "cluster_mode",
-    "error_file"   : "/home/nodeapp/logs/hostviewupload.log",
-    "out_file"     : "/home/nodeapp/logs/hostviewupload.log",
-    "pid_file"     : "/home/nodeapp/pids/hostviewupload",
-    "run_as_user"  : "nodeapp",
-    "run_as_group" : "nodeapp",
-    "cwd"          : "/home/nodeapp/apps/hostviewupload/app",
+  "apps": [{
+    "name": "hostviewupload",
+    "script": "app.js",
+    "instances": "4",
+    "exec_mode": "cluster_mode",
+    "error_file": "/home/nodeapp/logs/hostviewupload.log",
+    "out_file": "/home/nodeapp/logs/hostviewupload.log",
+    "pid_file": "/home/nodeapp/pids/hostviewupload",
+    "run_as_user": "nodeapp",
+    "run_as_group": "nodeapp",
+    "cwd": "/home/nodeapp/apps/hostviewupload/app",
     "env": {
-        "NODE_ENV" : "production",
-        "PORT"     : "3100",
-        "sails_upload__datadir" : "/home/nodeapp/hostviewdata"
+      "NODE_ENV": "production",
+      "PORT": "3100",
+      "sails_upload__datadir": "/home/nodeapp/hostviewdata"
     }
   }]
 }

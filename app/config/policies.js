@@ -15,10 +15,7 @@
  * For more information on configuring policies, check out:
  * http://sailsjs.org/#!/documentation/reference/sails.config/sails.config.policies.html
  */
-
-
 module.exports.policies = {
-
   /***************************************************************************
   *                                                                          *
   * Default policy for all controllers and actions (`true` allows public     *
@@ -26,10 +23,8 @@ module.exports.policies = {
   *                                                                          *
   ***************************************************************************/
   '*': false,
-
   /* Alllow all methods of the FileController. */
   FileController: {
-      '*': true
+    '*': true
   }
-
-};
+}

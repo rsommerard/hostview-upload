@@ -9,11 +9,8 @@
  * any private information to this file!
  *
  */
-
 module.exports = {
-
   log: {
     level: 'verbose'
   }
-
-};
+}
